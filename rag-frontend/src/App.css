@@ -1,0 +1,26 @@
+.chat-container {
+  padding: 20px;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 400px; /* Ancho máximo para que no se vea demasiado ancho en pantallas grandes */
+  margin: 50px auto; /* Centra el chat vertical y horizontalmente */
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #fff; /* Fondo blanco para el contenedor */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra suave para darle un efecto elevado */
+}
+
+.message-list {
+  height: 300px;
+  overflow: auto; /* Asegura que la lista sea desplazable */
+  padding: 8px;
+  margin-bottom: 20px; /* Espacio entre la lista de mensajes y el input */
+}
+
+.input-group {
+  display: flex;
+  align-items: center; /* Alinea verticalmente los elementos del input group */
+}
+
+input, .ant-btn {
+  vertical-align: top;
+}
