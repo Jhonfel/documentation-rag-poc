@@ -7,3 +7,4 @@ markdown2
 chromadb
 langchain-openai
 getpass
+langchain-community

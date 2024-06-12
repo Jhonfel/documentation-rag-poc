@@ -5,9 +5,25 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (inputValue.trim() !== '') {
-      setMessages([...messages, inputValue]);
+      // Send a POST request to the /ask endpoint
+      const response = await fetch('/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: inputValue })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Append the server response to the messages list
+        setMessages([...messages, `Q: ${inputValue}`, `A: ${data.response}`]);
+      } else {
+        const errorData = await response.json();
+        setMessages([...messages, `Q: ${inputValue}`, `Error: ${errorData.error}`]);
+      }
       setInputValue('');
     }
   };
