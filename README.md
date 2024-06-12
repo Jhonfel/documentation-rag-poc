@@ -14,6 +14,8 @@ Project Clementine aims to streamline the process of navigating extensive docume
 ### C4 Model Diagrams
 Below are links to C4 Model diagrams that detail the various layers of the system architecture:
 - **Context Diagram**: Overview of the system's interaction with external entities.
+<img width="475" alt="image" src="https://github.com/Jhonfel/documentation-rag-agentic-workflow/assets/6430163/da4f4586-a1db-4bbf-bc62-7aa33721da9e">
+
 - **Container Diagram**: Breaks down the system into its major containers showing the deployment of Flask services and React frontend.
 - **Component Diagram**: Details the components involved in the retrieval and generation of answers.
 - **Code Diagram**: Provides insights into the structure of the Flask and React codebases.
