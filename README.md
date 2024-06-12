@@ -14,6 +14,10 @@ Project Clementine aims to streamline the process of navigating extensive docume
 - **Scalable and Secure**: Cloud-compatible design ensures scalability and secure handling of sensitive documentation.
 
 ## Architecture
+
+![image](https://github.com/Jhonfel/documentation-rag-poc/assets/6430163/f8b4a12e-024d-4931-9851-f8c7d2f13445)
+
+
 ### C4 Model Diagrams
 Below are links to C4 Model diagrams that detail the various layers of the system architecture:
 - **Context Diagram**: Overview of the system's interaction with external entities.
