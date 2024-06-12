@@ -12,8 +12,14 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
+from markdown_extractor import MarkdownExtractor
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'  
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  
+
 
 # loading file
 loader = TextLoader('storage/knowledge.txt')
@@ -59,6 +65,39 @@ def serve_index():
 @app.route('/<path:path>')
 def serve_static(path):
     return send_from_directory('rag-frontend/dist', path)
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    # Check if the post request has the file part
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+
+    file = request.files['file']
+    # If user does not select file, browser submits an empty part without filename
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    # Check if the file is one of the allowed types/extensions
+    if file and (file.filename.endswith('.zip') or file.filename.endswith('.md')):
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+
+        # Process the saved file depending on its type
+        if filename.endswith('.zip'):
+            extract_path = os.path.join(app.config['UPLOAD_FOLDER'], 'extracted')
+            output_file_path = 'storage/knowledge.txt'
+            MarkdownExtractor.extract_and_convert_zip(filepath, extract_path, output_file_path)
+        elif filename.endswith('.md'):
+            with open(filepath, 'r') as md_file:
+                md_content = md_file.read()
+            text_content = MarkdownExtractor.markdown_to_text(md_content)
+            with open('storage/knowledge.txt', 'w') as output_file:
+                output_file.write(text_content + '\n')
+
+        return jsonify({'message': 'File processed successfully'}), 200
+
+    return jsonify({'error': 'Invalid file type'}), 400
 
 
 @app.route('/ask', methods=['POST'])

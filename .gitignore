@@ -8,8 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 rag-frontend/node_modules
-rag-frontend/dist
-rag-frontend/dist-ssr
 rag-frontend/*.local
 __pycache__
 

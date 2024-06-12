@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Input, List } from 'antd';
+import { Button, Input, List, message, Modal, Upload } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -7,7 +8,6 @@ function App() {
 
   const handleSend = async () => {
     if (inputValue.trim() !== '') {
-      // Send a POST request to the /ask endpoint
       const response = await fetch('/ask', {
         method: 'POST',
         headers: {
@@ -18,7 +18,6 @@ function App() {
 
       if (response.ok) {
         const data = await response.json();
-        // Append the server response to the messages list
         setMessages([...messages, `Q: ${inputValue}`, `A: ${data.response}`]);
       } else {
         const errorData = await response.json();
@@ -28,8 +27,62 @@ function App() {
     }
   };
 
+  const uploadProps = {
+    name: 'file',
+    multiple: false,
+    action: '/upload',
+    onChange(info) {
+      const { status } = info.file;
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+    onDrop(e) {
+      console.log('Dropped files', e.dataTransfer.files);
+    },
+  };
+
+  const fetchAndUploadDocumentation = async () => {
+    // Assuming the endpoint '/fetch-docs' will handle fetching from Amazon docs and uploading
+    const response = await fetch('/fetch-docs');
+    if (response.ok) {
+      message.success('Documentation fetched and uploaded successfully.');
+    } else {
+      message.error('Failed to fetch and upload documentation.');
+    }
+  };
+
+  const showUploadModal = () => {
+    Modal.confirm({
+      title: 'Upload Knowledge Base',
+      content: (
+        <div>
+          <Upload.Dragger {...uploadProps}>
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            <p className="ant-upload-hint">
+              Support for a single file upload. Strictly prohibit from uploading sensitive data.
+            </p>
+          </Upload.Dragger>
+          {/*<Button type="primary" onClick={fetchAndUploadDocumentation} style={{ marginTop: 16 }}>
+            Use Current Web Documentation
+          </Button>*/}
+        </div>
+      ),
+      okText: 'Close',
+      onOk() {},
+    });
+  };
+
   return (
     <div className="chat-container">
+      <Button type="primary" onClick={showUploadModal}>
+        Update Knowledge Base
+      </Button>
       <List
         header={<div>Chat Messages</div>}
         bordered
