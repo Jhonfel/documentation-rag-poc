@@ -11,7 +11,7 @@ rag-frontend/node_modules
 rag-frontend/dist
 rag-frontend/dist-ssr
 rag-frontend/*.local
-
+__pycache__
 
 # Editor directories and files
 .vscode/*

@@ -1,1 +1,9 @@
-Flask
+flask
+pinecone-client
+langchain_community
+langchain
+bs4
+markdown2
+chromadb
+langchain-openai
+getpass
