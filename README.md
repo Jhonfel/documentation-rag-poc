@@ -1,6 +1,9 @@
 # documentation-rag-agentic-workflow
 Agentic Retrieval Augmented Generation (A-RAG) for documentation answering
 
+<img width="679" alt="image" src="https://github.com/Jhonfel/documentation-rag-agentic-workflow/assets/6430163/bc25391d-4f96-406f-b109-65476487a4df">
+
+
 ## Overview
 Project Clementine aims to streamline the process of navigating extensive documentation for developers at Company X. This tool reduces the time spent searching for information and increases overall productivity. The Proof of Concept (POC) developed in collaboration with Loka focuses on enhancing developer experience by providing quick and accurate answers to common documentation-related queries.
 
