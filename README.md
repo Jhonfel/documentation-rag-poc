@@ -42,3 +42,35 @@ Employs a RAG workflow to enhance both information retrieval and answer accuracy
 ## Setup and Installation
 Instructions on setting up the project locally:
 1. Clone the repository:
+   ```bash
+   git clone https://github.com/Jhonfel/documentation-rag-poc.git
+   cd documentation-rag-poc
+   ```
+2. Build the project using the build script:
+   ```bash
+   ./build.sh
+   ```
+3. Start the application with the required environment variable for the OpenAI API key:
+   ```bash
+   OPENAI_API_KEY=your_openai_api_key ./start.sh
+   ```
+
+## Deployment in Production
+Instructions for deploying the project in production using AWS Fargate:
+1. Build your Docker image and tag it appropriately:
+   ```bash
+   docker build -t your-registry/your-image-name:tag .
+   ```
+2. Push the Docker image to your container registry (e.g., AWS ECR):
+   ```bash
+   docker push your-registry/your-image-name:tag
+   ```
+3. Create a secret in AWS to store the OpenAI API key:
+   ```bash
+   aws secretsmanager create-secret --name OpenAIKey --secret-string "{"OPENAI_API_KEY":"your_openai_api_key"}"
+   ```
+4. Deploy your Docker container on AWS Fargate:
+   - Ensure that your task definition references the secret for the OpenAI API key.
+   - Configure your Fargate service to use the pushed Docker image.
+
+   You can configure these settings through the AWS Management Console or by using the AWS CLI.
