@@ -1,4 +1,4 @@
-# documentation-rag-agentic-workflow
+# documentation-rag-poc
 Agentic Retrieval Augmented Generation (A-RAG) for documentation answering
 
 <img width="679" alt="image" src="https://github.com/Jhonfel/documentation-rag-agentic-workflow/assets/6430163/bc25391d-4f96-406f-b109-65476487a4df">
