@@ -28,6 +28,8 @@ Below are links to C4 Model diagrams that detail the various layers of the syste
 - **Code Diagram**: Provides insights into the structure of the Flask and React codebases.
 
 ### Retrieval-Augmented Generation (RAG) Workflow
+![image](https://github.com/Jhonfel/documentation-rag-poc/assets/6430163/18546bcb-d487-4d8b-80de-13ac937d11e3)
+
 Employs a RAG workflow to enhance both information retrieval and answer accuracy:
 - **Document Retrieval**: Leveraging OpenAI embeddings for dynamic documentation fetching.
 - **Answer Generation**: Utilizes LangChain to generate context-aware responses based on retrieved documents.
