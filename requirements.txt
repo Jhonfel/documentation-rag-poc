@@ -6,6 +6,8 @@ bs4
 markdown2
 chromadb
 langchain-openai
-getpass
 langchain-community
 werkzeug
+tavily-python
+langgraph
+langchainhub

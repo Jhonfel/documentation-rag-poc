@@ -1,11 +1,12 @@
 # Use a Python base image
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the requirements file and install the necessary packages
-COPY requirements.txt /app/
+COPY requirements.txt /app
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the project code to the container

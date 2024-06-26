@@ -5,16 +5,23 @@ import { InboxOutlined } from '@ant-design/icons';
 function App() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [loading, setLoading] = useState(false);  
+
 
   const handleSend = async () => {
     if (inputValue.trim() !== '') {
+      setLoading(true); 
+      let chatinput = inputValue
+      setInputValue("")
       const response = await fetch('/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ question: inputValue })
+        body: JSON.stringify({ question: chatinput })
+        
       });
+      
 
       if (response.ok) {
         const data = await response.json();
@@ -23,7 +30,8 @@ function App() {
         const errorData = await response.json();
         setMessages([...messages, `Q: ${inputValue}`, `Error: ${errorData.error}`]);
       }
-      setInputValue('');
+      setLoading(false);  
+
     }
   };
 
@@ -100,7 +108,7 @@ function App() {
           onPressEnter={handleSend}
           placeholder="Enter message..."
         />
-        <Button type="primary" onClick={handleSend}>Send</Button>
+        <Button type="primary" onClick={handleSend} loading={loading}>Send</Button>
       </Input.Group>
     </div>
   );
